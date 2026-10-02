@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lawal Bashir Bidemi | Software Engineer</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0a192f',
+                        lightNavy: '#112240',
+                        lightestNavy: '#233554',
+                        slate: '#8892b0',
+                        lightSlate: '#a8b2d1',
+                        lightestSlate: '#ccd6f6',
+                        accent: '#64ffda',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a192f;
+            color: #a8b2d1;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism & Hover effects */
+        .glass-card {
+            background: rgba(17, 34, 64, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: #64ffda;
+            box-shadow: 0 10px 30px -15px rgba(100, 255, 218, 0.2);
+        }
+
+        /* Typing Effect */
+        .typing-container {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #64ffda;
+            animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #64ffda; }
+        }
+
+        /* Background animated gradient mesh */
+        .bg-mesh {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at 15% 50%, rgba(100, 255, 218, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 85% 30%, rgba(17, 34, 64, 0.8) 0%, transparent 50%);
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Portfolio = () => {
+            const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+            useEffect(() => {
+                const handleMouseMove = (e) => {
+                    setMousePosition({ x: e.clientX, y: e.clientY });
+                };
+                window.addEventListener('mousemove', handleMouseMove);
+                return () => window.removeEventListener('mousemove', handleMouseMove);
+            }, []);
+
+            const projects = [
+                {
+                    title: "Enterprise Helpdesk Engine",
+                    description: "Full-stack enterprise support engine utilizing Firebase for real-time ticket tracking, automated status updates, and robust state management.",
+                    tech: ["JavaScript", "HTML/CSS", "Firebase"],
+                    repo: "Helpdesk-Dashboard"
+                },
+                {
+                    title: "Dispatch Route Engine",
+                    description: "Node.js-based distributed job queue and dispatch routing engine utilizing PostgreSQL and Redis for high-performance task scheduling and management.",
+                    tech: ["Node.js", "PostgreSQL", "Redis"],
+                    repo: ""
+                },
+                {
+                    title: "Interactive Physics Web Application",
+                    description: "A 10-page web application featuring physics-based challenges and randomized user interactions with an automated algorithmic hint system.",
+                    tech: ["JavaScript", "DOM Manipulation", "Algorithms"],
+                    repo: ""
+                },
+                {
+                    title: "Badrah Clothing Store",
+                    description: "Full-stack e-commerce clothing store featuring a dedicated admin panel and advanced GSAP micro-interactions.",
+                    tech: ["HTML", "CSS", "GSAP", "JavaScript"],
+                    repo: "badrah-clothing-store"
+                }
+            ];
+
+            const skills = [
+                "JavaScript (ES6+)", "Node.js", "React & Next.js", "HTML5 & CSS3", "GSAP Animations", 
+                "PostgreSQL", "MySQL", "Redis", "Firebase", "Cloud Architecture", "Git & GitHub", "Enterprise IT Support"
+            ];
+
+            return (
+                <div className="relative min-h-screen">
+                    <div className="bg-mesh"></div>
+                    
+                    {/* Custom cursor glow effect */}
+                    <div 
+                        className="fixed w-96 h-96 rounded-full pointer-events-none z-[-1] opacity-20 blur-3xl transition-transform duration-100 ease-out"
+                        style={{
+                            background: 'radial-gradient(circle, #64ffda 0%, transparent 70%)',
+                            transform: `translate(${mousePosition.x - 192}px, ${mousePosition.y - 192}px)`
+                        }}
+                    ></div>
+
+                    <nav className="fixed w-full top-0 z-50 glass-card border-none border-b border-white/5 py-4 px-8">
+                        <div className="max-w-6xl mx-auto flex justify-between items-center">
+                            <span className="text-accent font-bold text-xl tracking-tighter">LB.</span>
+                            <div className="flex gap-6 text-sm font-medium">
+                                <a href="#about" className="hover:text-accent transition-colors">About</a>
+                                <a href="#projects" className="hover:text-accent transition-colors">Projects</a>
+                                <a href="Lawal_BashiriCV.pdf" download className="text-accent border border-accent px-4 py-2 rounded hover:bg-accent/10 transition-colors">Resume</a>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <main className="max-w-6xl mx-auto px-8 pt-32 pb-20">
+                        {/* Hero Section */}
+                        <section className="min-h-[80vh] flex flex-col justify-center animate-fade-in-up">
+                            <p className="text-accent font-mono mb-4">Hi, my name is</p>
+                            <h1 className="text-5xl md:text-7xl font-bold text-lightestSlate mb-4">Lawal Bashir Bidemi.</h1>
+                            
+                            <div className="mb-6 h-12">
+                                <h2 className="text-3xl md:text-5xl font-bold text-slate typing-container">
+                                    Software Engineer & IT Specialist.
+                                </h2>
+                            </div>
+                            
+                            <p className="max-w-xl text-lg text-slate mb-10 leading-relaxed">
+                                I specialize in building robust backend systems, interactive web applications, and designing reliable cloud architectures. With a background in enterprise IT support, I focus on creating scalable, user-centric web and database solutions.
+                            </p>
+                            
+                            <div className="flex flex-wrap gap-4 items-center">
+                                <a href="Lawal_BashiriCV.pdf" className="px-6 py-3 bg-transparent border border-accent text-accent rounded hover:bg-accent/10 transition-colors font-mono">
+                                    <i className="fas fa-download mr-2"></i> Download CV
+                                </a>
+                                <a href="https://github.com/Pandora57" target="_blank" rel="noreferrer" className="p-3 text-lightSlate hover:text-accent transition-colors text-2xl">
+                                    <i className="fab fa-github"></i>
+                                </a>
+                                <a href="https://linkedin.com/in/lawal-bashir-8b2b222b1" target="_blank" rel="noreferrer" className="p-3 text-lightSlate hover:text-accent transition-colors text-2xl">
+                                    <i className="fab fa-linkedin"></i>
+                                </a>
+                                <a href="mailto:lawalbashir009@gmail.com" className="p-3 text-lightSlate hover:text-accent transition-colors text-2xl">
+                                    <i className="fas fa-envelope"></i>
+                                </a>
+                            </div>
+                        </section>
+
+                        {/* Skills Section */}
+                        <section id="about" className="py-20">
+                            <h3 className="text-2xl font-bold text-lightestSlate mb-8 flex items-center">
+                                <span className="text-accent font-mono text-xl mr-2">01.</span> Technologies & Skills
+                                <div className="h-px bg-lightestNavy flex-grow ml-6"></div>
+                            </h3>
+                            <div className="flex flex-wrap gap-3">
+                                {skills.map((skill, index) => (
+                                    <span key={index} className="px-4 py-2 text-sm font-mono text-accent glass-card rounded-full hover:bg-accent/10 transition-colors cursor-default">
+                                        {skill}
+                                    </span>
+                                ))}
+                            </div>
+                        </section>
+
+                        {/* Projects Section */}
+                        <section id="projects" className="py-20">
+                            <h3 className="text-2xl font-bold text-lightestSlate mb-12 flex items-center">
+                                <span className="text-accent font-mono text-xl mr-2">02.</span> Featured Projects
+                                <div className="h-px bg-lightestNavy flex-grow ml-6"></div>
+                            </h3>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                {projects.map((project, index) => (
+                                    <div key={index} className="glass-card rounded p-8 flex flex-col justify-between group">
+                                        <div>
+                                            <div className="flex justify-between items-center mb-6">
+                                                <i className="far fa-folder text-4xl text-accent group-hover:animate-pulse-slow"></i>
+                                                <a href={project.repo ? `https://github.com/Pandora57/${project.repo}` : "https://github.com/Pandora57"} target="_blank" rel="noreferrer" className="text-lightSlate hover:text-accent">
+                                                    <i className="fab fa-github text-xl"></i>
+                                                </a>
+                                            </div>
+                                            <h4 className="text-xl font-bold text-lightestSlate mb-3 group-hover:text-accent transition-colors">
+                                                {project.title}
+                                            </h4>
+                                            <p className="text-slate text-sm mb-6 line-clamp-3">
+                                                {project.description}
+                                            </p>
+                                        </div>
+                                        <ul className="flex flex-wrap gap-3 text-xs font-mono text-lightSlate">
+                                            {project.tech.map((tech, i) => (
+                                                <li key={i}>{tech}</li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+                        </section>
+                    </main>
+
+                    <footer className="text-center py-6 text-sm font-mono text-slate border-t border-white/5">
+                        <p>Designed & Built by Lawal Bashir Bidemi</p>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<Portfolio />);
+    </script>
+</body>
+</html>
